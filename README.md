@@ -1,2 +1,2 @@
-# Rock-Paper-Scissor---Skilvul
+# Rock Paper Scissor
  
