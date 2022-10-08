@@ -8,6 +8,7 @@ public class Bot : MonoBehaviour
     public Player player;
     public GameManager gameManager;
     public float choosingInterval;
+
     private float timer = 0;
     int lastSelected = 0;
     Card[] cards;

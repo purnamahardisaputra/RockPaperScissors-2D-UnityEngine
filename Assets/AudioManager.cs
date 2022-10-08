@@ -1,5 +1,6 @@
 
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -9,8 +10,21 @@ public class AudioManager : MonoBehaviour
     public Slider SFXSlider;
     public Slider BGMSlider;
     public AudioMixer mixer;
-    public bool muted;
-    // public AudioMixerGroup BGM;
+    public Toggle toggle;
+    private bool muted;
+
+    private void Awake()
+    {
+        if (AudioListener.pause == true)
+        {
+            toggle.isOn = true;
+        }
+        else
+        {
+            toggle.isOn = false;
+        }
+    }
+
     private void Start()
     {
 
@@ -26,14 +40,16 @@ public class AudioManager : MonoBehaviour
     {
         value = value * 80 - 80;
         mixer.SetFloat("SFX_Vol", value);
-        Debug.Log("SFX Volume" + " " + (value + 80) + "%");
+        var sum = ((value / 80) * 100) + 100;
+        Debug.Log("SFX Volume " + sum + "%");
     }
 
     public void BGMVolume(float value)
     {
         value = value * 80 - 80;
         mixer.SetFloat("BGM_Vol", value);
-        Debug.Log("BGM Volume" + " " + (value + 80) + "%");
+        var sum = ((value / 80) * 100) + 100;
+        Debug.Log("BGM Volume " + sum + "%");
     }
 
     public void MuteToggle()
