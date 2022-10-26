@@ -12,21 +12,24 @@ EditorBuildSettings:
     path: Assets/Scenes/Lobby.unity
     guid: f1351bb549f53a54a8555faf4ed584eb
   - enabled: 1
-    path: Assets/Scenes/2Player.unity
-    guid: 5f3143f9b9f06584293ab35ef77a52eb
-  - enabled: 1
-    path: Assets/Scenes/Easy.unity
-    guid: 7742f345d27510246af46fd707bed5ab
-  - enabled: 1
     path: Assets/Scenes/Medium.unity
     guid: daa7466b47c750f46950a375935e4898
   - enabled: 1
     path: Assets/Scenes/Level Selector.unity
     guid: 76aaea8ea54e9c74fa92aec2eea46ad5
   - enabled: 1
-    path: Assets/Scenes/Hard.unity
-    guid: 61c82899222628a4abc9ebcf7771841b
-  - enabled: 1
     path: Assets/Scenes/GamePlayShooter.unity
     guid: 1a719f90c26d9364e8faf45e52db2724
+  - enabled: 1
+    path: Assets/Scenes/OnlineGame.unity
+    guid: 1c6bf0270cf915f4e82d600f41e327b0
+  - enabled: 1
+    path: Assets/Scenes/Easy.unity
+    guid: 5ca028cda80ca34428ee62a3088b1733
+  - enabled: 1
+    path: Assets/Scenes/Hard.unity
+    guid: 13cc1b86c3e6ae342bb340544063c1dc
+  - enabled: 1
+    path: Assets/Scenes/2Player.unity
+    guid: 505727e6be3264548829f0ed317ef01b
   m_configObjects: {}

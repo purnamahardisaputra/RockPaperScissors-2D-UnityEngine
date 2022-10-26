@@ -25,7 +25,7 @@ public class ShooterPlayer : MonoBehaviourPun
         transform.Translate(moveDir * Time.deltaTime * speed);
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            photonView.RPC("TakeDamage", RpcTarget.Others, 1);
+            photonView.RPC("TakeDamage", RpcTarget.All, 1);
         }
     }
 

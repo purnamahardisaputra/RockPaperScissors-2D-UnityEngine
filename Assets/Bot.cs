@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Bot : MonoBehaviour
 {
-    public Player player;
+    public CardPlayer player;
     public GameManager gameManager;
     public float choosingInterval;
 

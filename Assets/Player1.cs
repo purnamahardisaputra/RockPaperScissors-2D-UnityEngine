@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player : MonoBehaviour
+public class Player1 : MonoBehaviour
 {
     public Transform atkPoskRef;
     public Card choosenCard;
