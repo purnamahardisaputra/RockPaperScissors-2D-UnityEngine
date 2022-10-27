@@ -14,6 +14,8 @@ public class CardGameManager : MonoBehaviour, IOnEventCallback
     public GameObject netPlayerPrefab;
     public CardPlayer P1;
     public CardPlayer P2;
+    public float restoreValue = 5;
+    public float damageValue = 10;
     public GameState State, NextState = GameState.NetPlayersInitialization;
     private CardPlayer damagedPlayer;
     private CardPlayer winner;
@@ -21,7 +23,7 @@ public class CardGameManager : MonoBehaviour, IOnEventCallback
     public TMP_Text WinnerText;
     public GameObject gameOverPanel;
     public List<int> syncReadyPlayers = new List<int>(2);
-
+    public bool Online = true;
     public enum GameState
     {
         SyncState,
@@ -36,8 +38,17 @@ public class CardGameManager : MonoBehaviour, IOnEventCallback
     private void Start()
     {
         gameOverPanel.SetActive(false);
-        PhotonNetwork.Instantiate(netPlayerPrefab.name, Vector3.zero, Quaternion.identity);
-        StartCoroutine(PingCoroutine());
+        if (Online)
+        {
+            PhotonNetwork.Instantiate(netPlayerPrefab.name, Vector3.zero, Quaternion.identity);
+            StartCoroutine(PingCoroutine());
+            State = GameState.NetPlayersInitialization;
+            NextState = GameState.NetPlayersInitialization;
+        }
+        else
+        {
+            State = GameState.ChooseAttack;
+        }
     }
 
     private void Update()
@@ -101,13 +112,13 @@ public class CardGameManager : MonoBehaviour, IOnEventCallback
                     //calculate health
                     if (damagedPlayer == P1)
                     {
-                        P1.ChangeHealth(-10);
-                        P2.ChangeHealth(5);
+                        P1.ChangeHealth(-damageValue);
+                        P2.ChangeHealth(restoreValue);
                     }
                     else
                     {
-                        P1.ChangeHealth(5);
-                        P2.ChangeHealth(-10);
+                        P1.ChangeHealth(restoreValue);
+                        P2.ChangeHealth(-damageValue);
                     }
 
                     var winner = getWinner();
@@ -122,7 +133,7 @@ public class CardGameManager : MonoBehaviour, IOnEventCallback
                     else
                     {
                         gameOverPanel.SetActive(true);
-                        WinnerText.text = winner == P1 ? "Player 1 Wins" : "Player 2 Wins";
+                        WinnerText.text = winner == P1 ? $"{P1.NickName.text} wins" : $"{P2.NickName.text} wins";
                         ResetPlayers();
                         ChangeState(GameState.GameOver);
                     }
@@ -152,9 +163,15 @@ public class CardGameManager : MonoBehaviour, IOnEventCallback
         PhotonNetwork.RemoveCallbackTarget(this);
     }
 
-    private void ChangeState(GameState nextState)
+    private void ChangeState(GameState newState)
     {
-        if (this.NextState == nextState)
+
+        if (Online == false)
+        {
+            State = newState;
+            return;
+        }
+        if (this.NextState == newState)
             return;
 
         // kirim message bahwa kita sudah siap
@@ -163,7 +180,7 @@ public class CardGameManager : MonoBehaviour, IOnEventCallback
         raiseEventOptions.Receivers = ReceiverGroup.All;
         PhotonNetwork.RaiseEvent(1, actorNum, raiseEventOptions, SendOptions.SendReliable);
         this.State = GameState.SyncState;
-        this.NextState = nextState;
+        this.NextState = newState;
     }
 
     public void OnEvent(EventData photonEvent)

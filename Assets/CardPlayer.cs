@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -9,12 +8,14 @@ public class CardPlayer : MonoBehaviour
     public Transform atkPoskRef;
     public Card choosenCard;
     private Tweener animationTwener;
+    public TMP_Text nameText;
     public TMP_Text healthText;
     public float Health;
     public HealthBar healthBar;
     public float MaxHealth;
-    public AudioSource audioSource;
+    public AudioSource audioSource; 
     public AudioClip damageClip;
+    public TMP_Text NickName { get => nameText; }
 
     private void Start()
     {

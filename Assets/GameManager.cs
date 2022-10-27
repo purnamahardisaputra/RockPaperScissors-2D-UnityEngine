@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
 
-    public CardPlayer P1;
-    public CardPlayer P2;
+    public Player1 P1;
+    public Player1 P2;
     public GameState State = GameState.ChooseAttack;
-    private CardPlayer damagedPlayer;
-    private CardPlayer winner;
+    private Player1 damagedPlayer;
+    private Player1 winner;
     public TMP_Text WinnerText;
 
     public GameObject gameOverPanel;
@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
         P2.Reset();
     }
 
-    private CardPlayer GetDamagedPlayer()
+    private Player1 GetDamagedPlayer()
     {
         Attack? PlayerAtk1 = P1.AttackValue;
         Attack? PlayerAtk2 = P2.AttackValue;
@@ -145,7 +145,7 @@ public class GameManager : MonoBehaviour
         return null;
     }
 
-    private CardPlayer getWinner()
+    private Player1 getWinner()
     {
         if (P1.Health == 0)
         {

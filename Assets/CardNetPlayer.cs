@@ -12,12 +12,18 @@ public class CardNetPlayer : MonoBehaviourPun
 
     public void Set(CardPlayer player)
     {
-        cardPlayer = player;
+        this.cardPlayer = player;
+        player.NickName.text = photonView.Owner.NickName;
         cards = cardPlayer.GetComponentsInChildren<Card>();
         foreach (var card in cards)
         {
             var button = card.GetComponent<Button>();
             button.onClick.AddListener(() => RemoteClickButton(card.AttackValue));
+
+            if (photonView.IsMine == false)
+            {
+                button.interactable = false;
+            }
         }
     }
 
@@ -44,6 +50,8 @@ public class CardNetPlayer : MonoBehaviourPun
                 var button = card.GetComponent<Button>();
                 button.onClick.Invoke();
                 break;
+
+
             }
         }
     }
