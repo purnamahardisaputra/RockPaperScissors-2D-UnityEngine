@@ -78,7 +78,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d322a1984b70504e8bb4f17183b3368, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  avaatarImage: {fileID: 1274750244261179274}
   playerName: {fileID: 1274750243491076752}
+  avatarSprites:
+  - {fileID: 21300000, guid: 119e6a3abaf6d6841b971b6607554a6c, type: 3}
+  - {fileID: 21300000, guid: f1bcb1214900d7242a72c2d2f5757034, type: 3}
+  - {fileID: 21300000, guid: 05dabacf8453ac64a846ebebc923aad1, type: 3}
 --- !u!1 &1274750243491076758
 GameObject:
   m_ObjectHideFlags: 0

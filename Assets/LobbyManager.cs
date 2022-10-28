@@ -100,14 +100,15 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     private void UpdatePlayerList()
     {
-        // PhotonNetwork.PlayerList (Alternative)
-        // foreach(Photon.Realtime.Player player in PhotonNetwork.PlayerList) (Alternative)
-
+        // destroy dulu semua player item yang sudah ada
         foreach (var item in playerItemList)
         {
             Destroy(item.gameObject);
         }
         playerItemList.Clear();
+
+        // PhotonNetwork.PlayerList (Alternative)
+        // foreach(Photon.Realtime.Player player in PhotonNetwork.PlayerList) (Alternative)
         foreach (var (id, player) in PhotonNetwork.CurrentRoom.Players)
         {
             PlayerItem newPlayerItem = Instantiate(playerItemPrefab, PlayerListObject.transform);
@@ -166,7 +167,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
         foreach (var roomInfo in roomInfoList)
         {
-            if (roomInfo.MaxPlayers == 0)
+            if (roomInfo.MaxPlayers == 0 || roomInfo.IsVisible == false)
                 continue;
 
             RoomItem newRoomItem = Instantiate(roomItemPrefab, RoomListObject.transform);

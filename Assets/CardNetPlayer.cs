@@ -7,14 +7,13 @@ using UnityEngine.UI;
 public class CardNetPlayer : MonoBehaviourPun
 {
     public static List<CardNetPlayer> NetPlayers = new List<CardNetPlayer>(2);
-    public CardPlayer cardPlayer;
     private Card[] cards;
 
     public void Set(CardPlayer player)
     {
-        this.cardPlayer = player;
+
         player.NickName.text = photonView.Owner.NickName;
-        cards = cardPlayer.GetComponentsInChildren<Card>();
+        cards = player.GetComponentsInChildren<Card>();
         foreach (var card in cards)
         {
             var button = card.GetComponent<Button>();
@@ -29,7 +28,7 @@ public class CardNetPlayer : MonoBehaviourPun
 
     private void OnDestroy()
     {
-        NetPlayers.Remove(this);
+
     }
 
     private void RemoteClickButton(Attack value)
@@ -62,6 +61,11 @@ public class CardNetPlayer : MonoBehaviourPun
 
     private void OnDisable()
     {
+        foreach (var card in cards)
+        {
+            var button = card.GetComponent<Button>();
+            button.onClick.RemoveAllListeners();
+        }
         NetPlayers.Remove(this);
     }
 }
