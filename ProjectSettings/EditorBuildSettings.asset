@@ -18,8 +18,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Level Selector.unity
     guid: 76aaea8ea54e9c74fa92aec2eea46ad5
   - enabled: 1
-    path: Assets/Scenes/GamePlayShooter.unity
-    guid: 1a719f90c26d9364e8faf45e52db2724
+    path: Assets/Scenes/GamePlayShooter1.unity
+    guid: 777525b7dcdb4f046b4c41c57ed47227
   - enabled: 1
     path: Assets/Scenes/OnlineGame.unity
     guid: 1c6bf0270cf915f4e82d600f41e327b0

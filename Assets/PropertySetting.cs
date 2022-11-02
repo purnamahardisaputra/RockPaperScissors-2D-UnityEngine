@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
 using TMPro;
-using Unity.Burst;
 using UnityEngine;
 using UnityEngine.UI;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
@@ -25,7 +24,7 @@ public class PropertySetting : MonoBehaviourPunCallbacks
         slider.maxValue = maxValue;
         slider.wholeNumbers = wholeNumbers;
         inputField.contentType = wholeNumbers ? TMP_InputField.ContentType.IntegerNumber : TMP_InputField.ContentType.DecimalNumber;
-        
+
         // ambil initial value dari server kalau ada
         if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(propertyKey, out var value))
         {
@@ -36,6 +35,7 @@ public class PropertySetting : MonoBehaviourPunCallbacks
         else
         {
             UpdateSliderInputField(initialValue);
+            SetCustomProperty(initialValue);
         }
 
         // ui hanya bisa di interactable oleh master saja

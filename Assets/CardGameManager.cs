@@ -44,6 +44,19 @@ public class CardGameManager : MonoBehaviour, IOnEventCallback
             StartCoroutine(PingCoroutine());
             State = GameState.NetPlayersInitialization;
             NextState = GameState.NetPlayersInitialization;
+            if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(PropertyNames.Room.RestoreValue, out var restoreValue))
+            {
+                this.restoreValue = (float)restoreValue;
+            }
+            if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(PropertyNames.Room.DamageValue, out var damageValue))
+            {
+                this.damageValue = (float)damageValue;
+            }
+            if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(PropertyNames.Room.MaxHealth, out var MaxHealth))
+            {
+                P1.MaxHealth = (float)MaxHealth;
+                P2.MaxHealth = (float)MaxHealth;
+            }
         }
         else
         {

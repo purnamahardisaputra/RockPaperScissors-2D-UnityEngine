@@ -10,12 +10,11 @@ public static class PropertyNames
         public const string NickName = "NickName";
     }
 
-}
+    public static class Room
+    {
+        public const string MaxHealth = "MaxHealth";
+        public const string RestoreValue = "RestoreValue";
+        public const string DamageValue = "DamageValue";
 
-public static class Room
-{
-    public const string MaxHealth = "MaxHealth";
-    public const string RestoreValue = "RestoreValue";
-    public const string DamageValue = "DamageValue";
-
+    }
 }
