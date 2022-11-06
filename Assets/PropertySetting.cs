@@ -76,7 +76,6 @@ public class PropertySetting : MonoBehaviourPunCallbacks
         var property = new Hashtable();
         property.Add(propertyKey, value);
         PhotonNetwork.CurrentRoom.SetCustomProperties(property);
-
     }
 
     public override void OnRoomPropertiesUpdate(Hashtable propertiesThatChanged)
