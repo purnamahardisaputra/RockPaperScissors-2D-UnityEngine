@@ -3674,9 +3674,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   avatarImage: {fileID: 2144295666}
   avatarSprites:
+  - {fileID: 21300000, guid: 9c30a6669bf86ae45b9ebaedb952ccfb, type: 3}
+  - {fileID: 21300000, guid: e372ed0ad1885104c861b2d22aa04ef8, type: 3}
+  - {fileID: 21300000, guid: b0f9784c94a48c94db09be2f18613149, type: 3}
+  - {fileID: 21300000, guid: 17df684c7a5286442ab06e9974acc34c, type: 3}
+  - {fileID: 21300000, guid: 9abf71af334e63542b25f3a6132b5eb5, type: 3}
+  - {fileID: 21300000, guid: 499a657bf20c5e246b0b4efc51d51606, type: 3}
+  - {fileID: 21300000, guid: 2758021bb9bda9e489bf70750b0365e9, type: 3}
+  - {fileID: 21300000, guid: 95a9d755e406f584896109c768eb93c4, type: 3}
+  - {fileID: 21300000, guid: 05dabacf8453ac64a846ebebc923aad1, type: 3}
   - {fileID: 21300000, guid: 119e6a3abaf6d6841b971b6607554a6c, type: 3}
   - {fileID: 21300000, guid: f1bcb1214900d7242a72c2d2f5757034, type: 3}
-  - {fileID: 21300000, guid: 05dabacf8453ac64a846ebebc923aad1, type: 3}
 --- !u!1 &1205893939
 GameObject:
   m_ObjectHideFlags: 0
