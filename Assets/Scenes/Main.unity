@@ -3674,9 +3674,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   avatarImage: {fileID: 2144295666}
   avatarSprites:
-  - {fileID: 21300000, guid: 9c30a6669bf86ae45b9ebaedb952ccfb, type: 3}
   - {fileID: 21300000, guid: e372ed0ad1885104c861b2d22aa04ef8, type: 3}
   - {fileID: 21300000, guid: b0f9784c94a48c94db09be2f18613149, type: 3}
+  - {fileID: 21300000, guid: 9c30a6669bf86ae45b9ebaedb952ccfb, type: 3}
   - {fileID: 21300000, guid: 17df684c7a5286442ab06e9974acc34c, type: 3}
   - {fileID: 21300000, guid: 9abf71af334e63542b25f3a6132b5eb5, type: 3}
   - {fileID: 21300000, guid: 499a657bf20c5e246b0b4efc51d51606, type: 3}

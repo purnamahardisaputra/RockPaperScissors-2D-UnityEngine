@@ -2024,7 +2024,6 @@ MonoBehaviour:
   ping: {fileID: 734842164}
   WinnerText: {fileID: 1801221100}
   gameOverPanel: {fileID: 1998127316}
-  syncReadyPlayers: 
   Online: 1
 --- !u!114 &611531258
 MonoBehaviour:
@@ -3491,7 +3490,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 611531258}
         m_TargetAssemblyTypeName: GamePlayNetworkManager, Assembly-CSharp
-        m_MethodName: Replay
+        m_MethodName: BackToLobby
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

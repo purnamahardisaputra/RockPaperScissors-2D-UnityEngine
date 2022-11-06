@@ -11,9 +11,9 @@ public class CardNetPlayer : MonoBehaviourPun
 
     public void Set(CardPlayer player)
     {
-
         player.NickName.text = photonView.Owner.NickName;
         cards = player.GetComponentsInChildren<Card>();
+
         foreach (var card in cards)
         {
             var button = card.GetComponent<Button>();
@@ -49,8 +49,6 @@ public class CardNetPlayer : MonoBehaviourPun
                 var button = card.GetComponent<Button>();
                 button.onClick.Invoke();
                 break;
-
-
             }
         }
     }
@@ -64,7 +62,7 @@ public class CardNetPlayer : MonoBehaviourPun
         foreach (var card in cards)
         {
             var button = card.GetComponent<Button>();
-            button.onClick.RemoveAllListeners();
+            button.onClick.RemoveListener(() => RemoteClickButton(card.AttackValue));
         }
         NetPlayers.Remove(this);
     }

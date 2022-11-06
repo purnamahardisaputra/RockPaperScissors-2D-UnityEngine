@@ -40,6 +40,9 @@ public class GamePlayNetworkManager : MonoBehaviourPunCallbacks
         {
             var scene = SceneManager.GetActiveScene();
             PhotonNetwork.LoadLevel(scene.name);
+            // PhotonNetwork.AutomaticallySyncScene = true;
+            
+            // DontDestroyOnLoad(gameObject);
         }
 
     }

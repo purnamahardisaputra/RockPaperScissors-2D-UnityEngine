@@ -22,7 +22,8 @@ public class CardGameManager : MonoBehaviour, IOnEventCallback
     public TMP_Text ping;
     public TMP_Text WinnerText;
     public GameObject gameOverPanel;
-    public List<int> syncReadyPlayers = new List<int>(2);
+    // public List<int> syncReadyPlayers = new List<int>(2);
+    HashSet<int> syncReadyPlayers = new HashSet<int>(2);
     public bool Online = true;
     public enum GameState
     {
@@ -44,6 +45,7 @@ public class CardGameManager : MonoBehaviour, IOnEventCallback
             StartCoroutine(PingCoroutine());
             State = GameState.NetPlayersInitialization;
             NextState = GameState.NetPlayersInitialization;
+
             if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(PropertyNames.Room.RestoreValue, out var restoreValue))
             {
                 this.restoreValue = (float)restoreValue;
@@ -175,6 +177,7 @@ public class CardGameManager : MonoBehaviour, IOnEventCallback
     {
         PhotonNetwork.RemoveCallbackTarget(this);
     }
+    private const byte playerChangeState = 1;
 
     private void ChangeState(GameState newState)
     {
@@ -191,18 +194,22 @@ public class CardGameManager : MonoBehaviour, IOnEventCallback
         var actorNum = PhotonNetwork.LocalPlayer.ActorNumber;
         var raiseEventOptions = new RaiseEventOptions();
         raiseEventOptions.Receivers = ReceiverGroup.All;
-        PhotonNetwork.RaiseEvent(1, actorNum, raiseEventOptions, SendOptions.SendReliable);
+        PhotonNetwork.RaiseEvent(playerChangeState, actorNum, raiseEventOptions, SendOptions.SendReliable);
+
         this.State = GameState.SyncState;
         this.NextState = newState;
     }
-
     public void OnEvent(EventData photonEvent)
     {
-        if (photonEvent.Code == 1)
+        switch (photonEvent.Code)
         {
-            var actorNum = (int)photonEvent.CustomData;
-            if (syncReadyPlayers.Contains(actorNum) == false)
+            case playerChangeState:
+                var actorNum = (int)photonEvent.CustomData;
+                // if (syncReadyPlayers.Contains(actorNum) == false)
                 syncReadyPlayers.Add(actorNum);
+                break;
+            default:
+                break;
         }
     }
     IEnumerator PingCoroutine()
