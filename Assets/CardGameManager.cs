@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
@@ -14,8 +15,13 @@ public class CardGameManager : MonoBehaviour, IOnEventCallback
     public GameObject netPlayerPrefab;
     public CardPlayer P1;
     public CardPlayer P2;
-    public float restoreValue = 5;
-    public float damageValue = 10;
+    public PlayerStats defaultPlayerStats = new PlayerStats
+    {
+        MaxHealth = 100,
+        RestoreHealth = 5,
+        DamageHealth = 10
+    };
+
     public GameState State, NextState = GameState.NetPlayersInitialization;
     private CardPlayer damagedPlayer;
     private CardPlayer winner;
@@ -48,22 +54,28 @@ public class CardGameManager : MonoBehaviour, IOnEventCallback
 
             if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(PropertyNames.Room.RestoreValue, out var restoreValue))
             {
-                this.restoreValue = (float)restoreValue;
+                defaultPlayerStats.RestoreHealth = (float)restoreValue;
             }
             if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(PropertyNames.Room.DamageValue, out var damageValue))
             {
-                this.damageValue = (float)damageValue;
+                defaultPlayerStats.DamageHealth = (float)damageValue;
             }
             if (PhotonNetwork.CurrentRoom.CustomProperties.TryGetValue(PropertyNames.Room.MaxHealth, out var MaxHealth))
             {
-                P1.MaxHealth = (float)MaxHealth;
-                P2.MaxHealth = (float)MaxHealth;
+                defaultPlayerStats.MaxHealth = (float)MaxHealth;
             }
         }
         else
         {
             State = GameState.ChooseAttack;
         }
+
+        P1.SetStats(defaultPlayerStats, true);
+        P2.SetStats(defaultPlayerStats, true);
+        P1.IsReady = true;
+        P2.IsReady = true;
+
+
     }
 
     private void Update()
@@ -127,13 +139,13 @@ public class CardGameManager : MonoBehaviour, IOnEventCallback
                     //calculate health
                     if (damagedPlayer == P1)
                     {
-                        P1.ChangeHealth(-damageValue);
-                        P2.ChangeHealth(restoreValue);
+                        P1.ChangeHealth(-P2.playerStats.DamageHealth);
+                        P2.ChangeHealth(P2.playerStats.RestoreHealth);
                     }
                     else
                     {
-                        P1.ChangeHealth(restoreValue);
-                        P2.ChangeHealth(-damageValue);
+                        P2.ChangeHealth(-P1.playerStats.DamageHealth);
+                        P1.ChangeHealth(P1.playerStats.RestoreHealth);
                     }
 
                     var winner = getWinner();

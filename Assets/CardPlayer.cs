@@ -11,15 +11,30 @@ public class CardPlayer : MonoBehaviour
     public TMP_Text nameText;
     public TMP_Text healthText;
     public float Health;
+    public PlayerStats playerStats = new PlayerStats
+    {
+        MaxHealth = 100,
+        RestoreHealth = 5,
+        DamageHealth = 10
+    };
     public HealthBar healthBar;
-    public float MaxHealth;
-    public AudioSource audioSource; 
+    public AudioSource audioSource;
     public AudioClip damageClip;
     public TMP_Text NickName { get => nameText; }
+    public bool IsReady = false;
 
     private void Start()
     {
-        Health = MaxHealth;
+        Health = playerStats.MaxHealth;
+    }
+    public void SetStats(PlayerStats stats, bool RestoreFullHealth = false)
+    {
+        this.playerStats = stats;
+        if (RestoreFullHealth)
+        {
+            Health = playerStats.MaxHealth;
+        }
+        UpdateHealthBar();
     }
     public Attack? AttackValue
     {
@@ -39,13 +54,13 @@ public class CardPlayer : MonoBehaviour
         {
             choosenCard.Reset();
         }
-
         choosenCard = null;
     }
     public void SetChosenCard(Card newCard)
     {
         if (choosenCard != null)
         {
+            choosenCard.transform.DOKill();
             choosenCard.Reset();
         }
 
@@ -53,14 +68,17 @@ public class CardPlayer : MonoBehaviour
         choosenCard.transform.DOScale(choosenCard.transform.localScale * 1.2f, 0.2f);
     }
 
+    public void UpdateHealthBar()
+    {
+        healthBar.UpdateBar(Health / playerStats.MaxHealth);
+        healthText.text = Health + "/" + playerStats.MaxHealth;
+    }
+
     public void ChangeHealth(float amount)
     {
         Health += amount;
-        Health = Mathf.Clamp(Health, 0, 100);
-        //healthbar
-        healthBar.UpdateBar(Health / MaxHealth);
-        //text
-        healthText.text = Health + " / " + MaxHealth;
+        Health = Mathf.Clamp(Health, 0, playerStats.MaxHealth);
+        UpdateHealthBar();
     }
 
     public void AnimateAttack()
