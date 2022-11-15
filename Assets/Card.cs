@@ -39,4 +39,10 @@ public class Card : MonoBehaviour
         isClickable = value;
     }
 
+    // private void OnDestroy()
+    // {
+    //     var button = GetComponentInChildren<Button>();
+    //     button.onClick.RemoveAllListeners();
+    // }
+
 }

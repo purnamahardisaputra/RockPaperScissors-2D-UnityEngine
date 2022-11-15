@@ -24,7 +24,17 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        PhotonNetwork.JoinLobby();
+        feedbackText.text = "Connecting to Lobby...";
+
+        if (PhotonNetwork.InRoom)
+        {
+            OnJoinedRoom();
+        }
+        else
+        {
+            PhotonNetwork.JoinLobby();
+            roomPanel.SetActive(false);
+        }
     }
     public void ClickCreateRoom()
     {

@@ -38,11 +38,11 @@ public class GamePlayNetworkManager : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            var scene = SceneManager.GetActiveScene();
-            PhotonNetwork.LoadLevel(scene.name);
+            // var scene = SceneManager.GetActiveScene();
             // PhotonNetwork.AutomaticallySyncScene = true;
-            
             // DontDestroyOnLoad(gameObject);
+            PhotonNetwork.LoadLevel("Lobby");
+
         }
 
     }

@@ -183,10 +183,14 @@ MonoBehaviour:
   nameText: {fileID: 159664061}
   healthText: {fileID: 1738563436}
   Health: 100
+  playerStats:
+    MaxHealth: 100
+    RestoreHealth: 5
+    DamageHealth: 10
   healthBar: {fileID: 1028986740}
-  MaxHealth: 100
   audioSource: {fileID: 652989745}
   damageClip: {fileID: 8300000, guid: 7bef0064f8567430cac22499c6b93d4f, type: 3}
+  IsReady: 0
 --- !u!114 &36159916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,7 +205,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 36159915}
   gameManager: {fileID: 611531253}
-  choosingInterval: 0.6
+  botStats:
+    name: 
+    choosingInterval: 0
+    MaxHealth: 0
+    RestoreHealth: 0
+    DamageHealth: 0
+  IsReady: 0
 --- !u!1 &96203778
 GameObject:
   m_ObjectHideFlags: 0
@@ -2017,10 +2027,13 @@ MonoBehaviour:
   netPlayerPrefab: {fileID: 7801747164051669838, guid: 31274fa3fbc368d4b8803b6302c9f28c, type: 3}
   P1: {fileID: 1826345755}
   P2: {fileID: 36159915}
-  restoreValue: 5
-  damageValue: 10
+  defaultPlayerStats:
+    MaxHealth: 100
+    RestoreHealth: 5
+    DamageHealth: 10
   State: 2
   NextState: 2
+  ReplayButton: {fileID: 1066592822}
   ping: {fileID: 734842164}
   WinnerText: {fileID: 1801221100}
   gameOverPanel: {fileID: 1998127316}
@@ -6325,10 +6338,14 @@ MonoBehaviour:
   nameText: {fileID: 554564134}
   healthText: {fileID: 1187417801}
   Health: 100
+  playerStats:
+    MaxHealth: 100
+    RestoreHealth: 5
+    DamageHealth: 10
   healthBar: {fileID: 1892236740}
-  MaxHealth: 100
   audioSource: {fileID: 652989745}
   damageClip: {fileID: 8300000, guid: 7bef0064f8567430cac22499c6b93d4f, type: 3}
+  IsReady: 0
 --- !u!1 &1892236736
 GameObject:
   m_ObjectHideFlags: 0

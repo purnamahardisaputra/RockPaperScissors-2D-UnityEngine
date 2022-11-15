@@ -26,9 +26,9 @@ public class CardNetPlayer : MonoBehaviourPun
         }
     }
 
-    private void OnDestroy()
+    private void Awake()
     {
-
+        // NetPlayers.Clear();
     }
 
     private void RemoteClickButton(Attack value)
@@ -61,6 +61,10 @@ public class CardNetPlayer : MonoBehaviourPun
     {
         foreach (var card in cards)
         {
+            // if (card == null)
+            // {
+            //     continue;
+            // }
             var button = card.GetComponent<Button>();
             button.onClick.RemoveListener(() => RemoteClickButton(card.AttackValue));
         }

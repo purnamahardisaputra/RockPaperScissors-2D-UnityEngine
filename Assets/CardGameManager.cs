@@ -1,14 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.XR;
+using UnityEngine.UI;
 
 public class CardGameManager : MonoBehaviour, IOnEventCallback
 {
@@ -24,6 +22,7 @@ public class CardGameManager : MonoBehaviour, IOnEventCallback
 
     public GameState State, NextState = GameState.NetPlayersInitialization;
     private CardPlayer damagedPlayer;
+    [SerializeField] private GameObject ReplayButton;
     private CardPlayer winner;
     public TMP_Text ping;
     public TMP_Text WinnerText;
@@ -160,6 +159,16 @@ public class CardGameManager : MonoBehaviour, IOnEventCallback
                     else
                     {
                         gameOverPanel.SetActive(true);
+                        //replay button harus diatur lagi
+                        if (PhotonNetwork.IsMasterClient)
+                        {
+                            ReplayButton.SetActive(true);
+                        }
+                        else
+                        {
+                            ReplayButton.SetActive(false);
+                        }
+
                         WinnerText.text = winner == P1 ? $"{P1.NickName.text} wins" : $"{P2.NickName.text} wins";
                         ResetPlayers();
                         ChangeState(GameState.GameOver);
